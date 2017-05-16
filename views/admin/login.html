@@ -6,10 +6,10 @@
 	<link rel="stylesheet" type="text/css" href="static/common/js/dist/vue.css">
 	<link rel="stylesheet" type="text/css" href="static/admin/css/admin.css">
 </head>
-<body>
+<body onkeydown="keyLogin();">
 <div id="app">
 	<div id="login">
-		<xh-login></xh-login>
+		<xh-login captchaid="{{.CaptchaId}}" imgurl="/captcha/{{.CaptchaId}}.png"></xh-login>
 	</div>
 </div>
 	
@@ -17,4 +17,5 @@
 <script src="static/common/js/dist/jquery-3.2.1.min.js"></script>
 <script src="static/common/js/dist/common.js"></script>
 <script src="static/common/js/dist/page.js"></script>
+<script src="static/admin/js/admin.common.js"></script>
 </html>

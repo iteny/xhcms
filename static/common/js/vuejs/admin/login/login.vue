@@ -18,6 +18,11 @@
 		<el-form-item label="密码" prop="password">
 			<el-input type="password" v-model="xhForm.password"></el-input>
 		</el-form-item>
+		<el-form-item label="验证码" prop="captcha" style="position: relative;">
+			<img :src="imgurl" style="position:absolute;top:2px;right:2px;z-index:999;" />
+			<el-input v-model="xhForm.captcha" :maxlength="15"></el-input>
+			<input type="hidden" v-model="xhForm.captcha_id" />
+		</el-form-item>
 		<el-form-item>
 			<el-button id="loginsubmit" type="primary" @click="submitForm('xhForm')" style="width:100%" v-loading.fucllscreen.lock="fullscreenloading">登录</el-button>
 		</el-form-item>
@@ -25,12 +30,24 @@
 </template>
 <script>
 export default{
+	props:{
+		captchaid:{
+			type:String,
+			default:'text'
+		},
+		imgurl:{
+			type:String,
+			default:'text'
+		}
+	},
 	data(){
 		return{
 			fullscreenloading:false,
 			xhForm:{
 				username:'',
 				password:'',
+				captcha:'',
+				captchaid:'',
 			},
 			rules:{
 				username:[
@@ -52,7 +69,7 @@ export default{
 					$.ajax({
 						type:'post',
 						url:'/admin',
-						data:{username:this.xhForm.username,password:this.xhForm.password},
+						data:{username:this.xhForm.username,password:this.xhForm.password,captcha:this.xhForm.captcha,captcha_id:this.captchaid},
 						dataType:"json",
 						beforeSend:function(){
 							e.fullscreenloading =true;

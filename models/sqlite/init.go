@@ -16,7 +16,7 @@ func init() {
 		log.Fatalf("Fail to create engine: %v\n", err)
 	}
 	//同步结构体与数据表
-	if err = x.Sync2(new(User)); err != nil {
+	if err = x.Sync2(new(User), new(LoginLog)); err != nil {
 		log.Fatalf("Fail to sync database: %v\n", err)
 	}
 

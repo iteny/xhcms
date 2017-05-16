@@ -57,14 +57,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	props: {
+		captchaid: {
+			type: String,
+			default: 'text'
+		},
+		imgurl: {
+			type: String,
+			default: 'text'
+		}
+	},
 	data() {
 		return {
 			fullscreenloading: false,
 			xhForm: {
 				username: '',
-				password: ''
+				password: '',
+				captcha: '',
+				captchaid: ''
 			},
 			rules: {
 				username: [{ require: true, message: '请输入用户名', trigger: 'blur' }, { min: 5, max: 15, message: '长度在5到15个字符', trigger: 'blur' }],
@@ -80,7 +97,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					$.ajax({
 						type: 'post',
 						url: '/admin',
-						data: { username: this.xhForm.username, password: this.xhForm.password },
+						data: { username: this.xhForm.username, password: this.xhForm.password, captcha: this.xhForm.captcha, captcha_id: this.captchaid },
 						dataType: "json",
 						beforeSend: function () {
 							e.fullscreenloading = true;
@@ -8841,6 +8858,54 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.xhForm.password = $$v
       },
       expression: "xhForm.password"
+    }
+  })], 1), _vm._v(" "), _c('el-form-item', {
+    staticStyle: {
+      "position": "relative"
+    },
+    attrs: {
+      "label": "验证码",
+      "prop": "captcha"
+    }
+  }, [_c('img', {
+    staticStyle: {
+      "position": "absolute",
+      "top": "2px",
+      "right": "2px",
+      "z-index": "999"
+    },
+    attrs: {
+      "src": _vm.imgurl
+    }
+  }), _vm._v(" "), _c('el-input', {
+    attrs: {
+      "maxlength": 15
+    },
+    model: {
+      value: (_vm.xhForm.captcha),
+      callback: function($$v) {
+        _vm.xhForm.captcha = $$v
+      },
+      expression: "xhForm.captcha"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.xhForm.captcha_id),
+      expression: "xhForm.captcha_id"
+    }],
+    attrs: {
+      "type": "hidden"
+    },
+    domProps: {
+      "value": (_vm.xhForm.captcha_id)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.xhForm.captcha_id = $event.target.value
+      }
     }
   })], 1), _vm._v(" "), _c('el-form-item', [_c('el-button', {
     directives: [{
